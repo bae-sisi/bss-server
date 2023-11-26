@@ -28,7 +28,7 @@ public class UserContorller {
     }
 
 
-    @GetMapping("/get/user")
+    @GetMapping("/auth/get/user")
     public ResponseEntity getUser(){
         User user = (User) userService.loadUserById(Security.getCurrentSid());
 
@@ -77,7 +77,7 @@ public class UserContorller {
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/currentuser")
+    @GetMapping(path = "/auth/currentuser")
     public ResponseEntity getCurrentUserData() {
         HashMap<String, Object> result = new HashMap<>();
 
@@ -136,7 +136,7 @@ public class UserContorller {
     }
 
 
-    @PutMapping("/user/{sid}")
+    @PutMapping("/auth/user/{sid}")
     public ResponseEntity updateUser(@PathVariable("sid") String sid,
                                      @RequestBody Map<String, String> body) {
         System.out.printf(sid);

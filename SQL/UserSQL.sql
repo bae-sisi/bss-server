@@ -1,4 +1,4 @@
-create database besisi;
+create database baesisi;
 
 use besisi;
 
