@@ -34,13 +34,13 @@ public class UserService implements UserDetailsService {
     }
 
     /**
-     * @param sid
+     * @param username
      * @return username가 받은 값인 user를 찾아 User(UserDetails의 자식 클래스) 객체를 반환합니다.
      * @throws UsernameNotFoundException
      */
     @Override
-    public UserDetails loadUserByUsername(String sid) throws UsernameNotFoundException {
-        User user = userRepository.findBySid(sid)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not present"));
         return user;
     }
@@ -177,7 +177,7 @@ public class UserService implements UserDetailsService {
      * @param sid
      * @return 사용할 수 있으면 true, 없으면 false
      */
-    public boolean canUseAsUsername(String sid) {
+    public boolean canUseAsSid(String sid) {
         return !userRepository.existsBySid(sid) && !sid.equals("anonymousUser");
     }
 

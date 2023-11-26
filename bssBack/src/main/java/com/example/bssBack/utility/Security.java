@@ -11,7 +11,7 @@ public class Security {
     /**
      * @return 현재 로그인한 사용자의 username을 반환합니다. (토큰이 없거나 잘못된 경우 "anonymousUser" 반환)
      */
-    public static String getCurrentUsername()
+    public static String getCurrentSid()
     {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getPrincipal().toString();
