@@ -1,6 +1,6 @@
 create database baesisi;
 
-use besisi;
+use baesisi;
 
 CREATE TABLE `attempt` (
   `id` bigint NOT NULL AUTO_INCREMENT,
