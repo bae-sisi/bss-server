@@ -163,4 +163,3 @@ $RECYCLE.BIN/
 *.msm
 
 #파일 제외 (파일명.확장자)
-bssBack/src/main/resources/application.properties
