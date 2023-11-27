@@ -28,6 +28,10 @@ public class Professor {
     @Column(name = "edu_background")
     private String EduBackGround;
 
+
+ /*   @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY)
+    private List<Progress> progresses = new ArrayList<>();*/
+
     private String office;
     private String phone;
     private String major;

@@ -1,9 +1,11 @@
 package com.example.bssBack.controller;
 
+import com.example.bssBack.dtos.ProgressDto;
 import com.example.bssBack.entity.ProgressView;
 import com.example.bssBack.entity.Lecture;
 import com.example.bssBack.entity.Professor;
 import com.example.bssBack.entity.Progress;
+import com.example.bssBack.service.EvaluationService;
 import com.example.bssBack.service.LectureService;
 import com.example.bssBack.service.ProfessorService;
 import com.example.bssBack.service.ProgressService;
@@ -25,7 +27,9 @@ public class ProgressController {
     private ProfessorService professorService;
 
 
-    public ProgressController(ProgressService progressService, LectureService lectureService, ProfessorService professorService){
+
+    public ProgressController(ProgressService progressService, LectureService lectureService,
+                              ProfessorService professorService, EvaluationService evaluationService){
         this.lectureService = lectureService;
         this.progressService = progressService;
         this.professorService = professorService;
@@ -33,6 +37,10 @@ public class ProgressController {
 
     @PostMapping("/make/progress")
     public ResponseEntity Make(@RequestParam("lecture") String lecture, @RequestParam("prof") String prof) throws Exception{
+
+        System.out.println(lecture);
+        System.out.printf(prof);
+
         try{
             Lecture lectures = lectureService.FindLeture(lecture);
 
@@ -62,6 +70,7 @@ public class ProgressController {
     public List<ProgressView> GetAllProgress(){
         return progressService.FindAll();
     }
+
 
 }
 

@@ -16,4 +16,9 @@ public class Progress {
 
     private Long Lid;
 
+
+/*    @ManyToOne
+    @JoinColumn(name = "Pid")
+    private Professor professor;*/
+
 }
