@@ -29,3 +29,59 @@ CREATE TABLE `lecture` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 create view `progress_view` as Select p.id, l.Lid, l.name as `lecture_Name`, pf.Pid, pf.name as `prof_Name` from progress p, lecture l, professor pf where p.Lid = l.Lid and p.Pid = pf.Pid;
+
+
+
+
+
+
+
+
+create table `event`(
+	`eid` bigint not null auto_increment,
+    `title` varchar(100) not null,
+    `content` varchar(500) not null,
+    `created_at` datetime not null,
+    `user_id` varchar(20) default null,
+    primary key(`eid`) using btree
+);
+
+create table `findmember`(
+	`fid` bigint not null auto_increment,
+    `title` varchar(100) not null,
+    `content` varchar(500) not null, 
+    `end_date` varchar(100) not null,
+    `prof_name` varchar(20) not null,
+    `lacture_name` varchar(20) not null,
+    `created_at` datetime not null,
+    `user_id` varchar(20) default null ,
+    primary key(`fid`) using btree
+);
+
+create table `comment`(
+	`cid` bigint not null auto_increment,
+    `content` varchar(200) not null,
+    `rate`  int(5) default 1,
+    `enroll_Sems` varchar(15) not null,
+    `recmnd_Cnt` int default 0,
+    `sid` bigint not null, 
+    `progress_id` bigint not null,
+    primary key(`cid`)
+);
+
+
+create table `Evaluation`(
+	`vid` bigint not null auto_increment,
+	`cid` bigint not null,
+    `assignment_freq` int not null,
+    `group_freq` int not null,
+    `grading` int not null,
+    `attending` int not null,
+    `exam_num` int not null,
+    `pgid` bigint not null,
+    primary key(`vid`, `cid`),
+    foreign key(`pgid`) REFERENCES `progress`(`id`)
+);
+
+
+create view `progress_view` as Select p.id, l.Lid, l.name as `lecture_Name`, pf.Pid, pf.name as `prof_Name` from progress p, lecture l, professor pf where p.Lid = l.Lid and p.Pid = pf.Pid;
