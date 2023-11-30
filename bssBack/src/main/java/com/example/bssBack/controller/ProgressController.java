@@ -1,6 +1,6 @@
 package com.example.bssBack.controller;
 
-import com.example.bssBack.dtos.ProgressDto;
+import com.example.bssBack.dtos.ProgressViewDto;
 import com.example.bssBack.entity.ProgressView;
 import com.example.bssBack.entity.Lecture;
 import com.example.bssBack.entity.Professor;
@@ -67,8 +67,10 @@ public class ProgressController {
     }
 
     @GetMapping("/get/all/progress")
-    public List<ProgressView> GetAllProgress(){
-        return progressService.FindAll();
+    public List<ProgressViewDto> GetAllProgress(@RequestParam(value = "grade") Integer grade, @RequestParam("index") String index){
+        System.out.println(grade);
+        System.out.println(index);
+        return progressService.FindAll(grade, index);
     }
 
 

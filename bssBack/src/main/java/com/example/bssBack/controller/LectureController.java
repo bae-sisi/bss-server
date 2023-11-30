@@ -20,11 +20,12 @@ public class LectureController {
 
 
     @PostMapping("/save/lecture")
-    public ResponseEntity createLecture(@RequestParam("name") String name){
+    public ResponseEntity createLecture(@RequestParam("name") String name, @RequestParam("grade") Integer grade){
         try{
             Lecture lecture = new Lecture();
 
             lecture.setName(name);
+            lecture.setGrade(grade);
             lectureService.Save(lecture);
 
             HashMap<String, Object> result = new HashMap<>();

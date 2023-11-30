@@ -46,6 +46,13 @@ create table `findmember`(
     primary key(`fid`) using btree
 );
 
+create table `lecture`(
+	`lid` bigint not null auto_increment,
+    `name` varchar(100) not null, 
+    `semester` int default 0,
+    primary key(`lid`)
+);
+
 create table `comment`(
 	`cid` bigint not null auto_increment,
     `content` varchar(200) not null,
@@ -72,16 +79,17 @@ create table `Evaluation`(
 );
 
 
-insert into evaluation values();
-
-create view `progress_view` as Select p.id, l.Lid, l.name as `lecture_Name`, pf.Pid, pf.name as `prof_Name` from progress p, lecture l, professor pf where p.Lid = l.Lid and p.Pid = pf.Pid;
+create view `progress_view` as Select p.id as progressID, l.name as `lecture_Name`, l.semester as `semester`,
+pf.name as `prof_Name`
+from progress p, lecture l, professor pf where p.Lid = l.Lid and p.Pid = pf.Pid;
 
 select avg(c.rate) as Rate from comment as c where c.progress_id = 3;
 
+use baesisi;
 
-select avg(c.rate) as Rate, pv.lecture_Name, pv.prof_Name 
-from comment as c join progress_view as pv on c.progress_id=pv.id 
-where c.progress_id=3;
+select pv.progressID, avg(c.rate) as Rate, pv.lecture_Name, pv.prof_Name 
+from comment as c join progress_view as pv on c.progress_id=pv.progressID
+where c.progress_id=1;
 
 SELECT
   CASE
@@ -123,5 +131,7 @@ FROM (
   FROM
     evaluation
   WHERE
-    pgid = 3
+    pgid = 1
 ) AS ev;
+
+

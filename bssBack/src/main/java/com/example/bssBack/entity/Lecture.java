@@ -17,4 +17,6 @@ public class Lecture {
     private Long Lid;
 
     private String name;
+
+    private Integer grade;
 }

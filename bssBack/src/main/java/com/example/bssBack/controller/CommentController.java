@@ -87,5 +87,10 @@ public class CommentController {
         }
     }
 
+    @GetMapping("/increase/recmnd/{cid}")
+    public void IncrsRecmnd(@PathVariable("cid") Long cid){
+        commentService.IncresRecmnd(cid);
+    }
+
 
 }

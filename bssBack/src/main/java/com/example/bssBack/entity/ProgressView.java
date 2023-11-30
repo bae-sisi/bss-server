@@ -19,9 +19,9 @@ import org.hibernate.annotations.Subselect;
 @AllArgsConstructor
 public class ProgressView {
     @Id
-    private Long id;
-    private Long Lid;
-    private Long Pid;
+    private Long progressID;
+
+    private Integer grade;
 
     @Column(name = "prof_Name")
     private String profName;
