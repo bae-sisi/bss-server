@@ -23,6 +23,8 @@ public class ProgressView {
 
     private Integer grade;
 
+    private Integer year;
+
     @Column(name = "prof_Name")
     private String profName;
 

@@ -49,7 +49,7 @@ create table `findmember`(
 create table `lecture`(
 	`lid` bigint not null auto_increment,
     `name` varchar(100) not null, 
-    `semester` int default 0,
+    `grade` int default 0,
     primary key(`lid`)
 );
 
@@ -78,18 +78,18 @@ create table `Evaluation`(
     foreign key(`pgid`) REFERENCES `progress`(`id`)
 );
 
+use baesisi;
 
-create view `progress_view` as Select p.id as progressID, l.name as `lecture_Name`, l.semester as `semester`,
-pf.name as `prof_Name`
-from progress p, lecture l, professor pf where p.Lid = l.Lid and p.Pid = pf.Pid;
+create view `progress_view` as Select p.id as `progressID`, l.name as `lecture_Name`, l.grade as `grade` ,pf.name as `prof_Name`, p.year as `year`
+from progress as p, lecture as l, professor as pf where p.Lid = l.Lid and p.Pid = pf.Pid;
 
-select avg(c.rate) as Rate from comment as c where c.progress_id = 3;
+select avg(c.rate) as Rate from comment as c where c.progress_id = 2;
 
 use baesisi;
 
 select pv.progressID, avg(c.rate) as Rate, pv.lecture_Name, pv.prof_Name 
 from comment as c join progress_view as pv on c.progress_id=pv.progressID
-where c.progress_id=1;
+where c.progress_id=2;
 
 SELECT
   CASE
@@ -113,14 +113,14 @@ SELECT
     when ev.Attending > 2 then '지정좌석'
     when ev.Attending > 1 then '전자출결'
 	ELSE '반영안함'
-  END AS `Att`,
+  END AS `ATT`,
   case 
 	when ev.ExamN > 4 then '네번이상'
     when ev.ExamN > 3 then '세번'
     when ev.ExamN > 2 then '두번'
     when ev.ExamN > 1 then '한번'
     ELSE '없음'
-  END AS `Ex`
+  END AS `EX`
 FROM (
   SELECT
     AVG(assignment_freq) AS AsignFreq,
@@ -134,4 +134,28 @@ FROM (
     pgid = 1
 ) AS ev;
 
+
+SELECT CASE WHEN ev.AsignFreq > 2 THEN '많음' WHEN ev.AsignFreq > 1 THEN '보통' ELSE '없음' END AS `AF`,
+  case when ev.GrpFreq > 2 then '많음' when ev.GrpFreq > 1 then '보통' ELSE '없음' END AS `GF`,
+  case when ev.Grading > 2 then '너그러움' when ev.Grading > 1 then '보통' ELSE '깐깐함' END AS `GR`,
+  case when ev.Attending > 4 then '복합적' when ev.Attending > 3 then '직접호명' when ev.Attending > 2 then '지정좌석' when ev.Attending > 1 then '전자출결' ELSE '반영안함' END AS `ATT`,
+  case when ev.ExamN > 4 then '네번이상' when ev.ExamN > 3 then '세번' when ev.ExamN > 2 then '두번' when ev.ExamN > 1 then '한번' ELSE '없음' END AS `EX`
+FROM ( SELECT AVG(assignment_freq) AS AsignFreq, AVG(group_freq) AS GrpFreq, AVG(grading) AS Grading, AVG(attending) AS Attending, AVG(exam_num) AS ExamN
+  FROM evaluation WHERE pgid = 1 ) AS ev;
+
+Insert into `progress`(Pid, Lid) value((select p.Pid from professor as p where p.name = "정지훈"),
+(select l.lid from lecture as l where l.name = "python"));
+
+
+SELECT CASE WHEN EXISTS ( SELECT 1 FROM progress AS pr
+WHERE pr.Pid = (SELECT p.Pid FROM professor AS p WHERE p.name = "정지훈")
+AND pr.Lid = (SELECT l.lid FROM lecture AS l WHERE l.name = "python") )
+THEN 'False' ELSE 'True' END AS Result;
+
+
+
+
+
+select p.Pid from professor as p where p.name = "정지훈";
+select l.lid from lecture as l where l.name = "python";
 

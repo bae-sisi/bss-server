@@ -16,6 +16,7 @@ public class Progress {
 
     private Long Lid;
 
+    private Integer year;
 
 /*    @ManyToOne
     @JoinColumn(name = "Pid")

@@ -1,5 +1,6 @@
 package com.example.bssBack.controller;
 
+import com.example.bssBack.dtos.EvaluationDto;
 import com.example.bssBack.dtos.ProgressViewDto;
 import com.example.bssBack.entity.ProgressView;
 import com.example.bssBack.entity.Lecture;
@@ -26,6 +27,8 @@ public class ProgressController {
 
     private ProfessorService professorService;
 
+    private EvaluationService evaluationService;
+
 
 
     public ProgressController(ProgressService progressService, LectureService lectureService,
@@ -33,16 +36,14 @@ public class ProgressController {
         this.lectureService = lectureService;
         this.progressService = progressService;
         this.professorService = professorService;
+        this.evaluationService = evaluationService;
     }
 
     @PostMapping("/make/progress")
-    public ResponseEntity Make(@RequestParam("lecture") String lecture, @RequestParam("prof") String prof) throws Exception{
-
-        System.out.println(lecture);
-        System.out.printf(prof);
+    public ResponseEntity Make(@RequestParam("lecture") String lecture, @RequestParam("prof") String prof, @RequestParam("year") Integer year) throws Exception{
 
         try{
-            Lecture lectures = lectureService.FindLeture(lecture);
+/*            Lecture lectures = lectureService.FindLeture(lecture);
 
             Professor professor = professorService.FindProfINFO(prof);
 
@@ -53,7 +54,10 @@ public class ProgressController {
 
             System.out.println(progress);
 
-            progressService.Save(progress);
+            progressService.Save(progress);*/
+            // 예전에 교과목명, 교수명으로 저장한게 있다면 못넣게 막는다 / 그냥 년도만 업댓되게 / 어,,, 그리고 년도 컬럼 추가 필요
+            progressService.TestSave(lecture, prof, year);
+
 
             HashMap<String, Object> result = new HashMap<>();
             result.put("result", "개설 교과목 등록에 성공하였습니다.");
@@ -67,10 +71,21 @@ public class ProgressController {
     }
 
     @GetMapping("/get/all/progress")
-    public List<ProgressViewDto> GetAllProgress(@RequestParam(value = "grade") Integer grade, @RequestParam("index") String index){
+    public List<ProgressViewDto> GetAllProgress(@RequestParam(value = "grade") Integer grade, @RequestParam( value = "index") String index){
+
+        if(index.isEmpty() && index.isBlank()){
+            index = null;
+        }
+
         System.out.println(grade);
         System.out.println(index);
         return progressService.FindAll(grade, index);
+    }
+
+
+    @GetMapping("/get/avg/evaluation")
+    public EvaluationDto GetEvaluationAVG(@RequestParam("id") Long id){
+        return evaluationService.GetEvaluation(id);
     }
 
 

@@ -30,20 +30,33 @@ public class ProgressService {
 
         if(grade==0 && Index == null){
             //검색 조건 없을때 전채 가져오기
+            System.out.println("get All");
             return  progressViewRepository.FindAllProgress();
         }else if(grade != 0 && (Index == null || Index.isBlank())){
             // 검색 조건 : 학년만 있을떄
+            System.out.println("get by grade");
             return  progressViewRepository.FindProgressesByGrade(grade);
         }else if(grade ==0 && Index != null && !Index.isBlank()){
             // 검색 조건 : 검색어만 있을때
+            System.out.println("get by index");
             return progressViewRepository.FindConsistIndexProgress(Index);
         }
 
         // 검색 조건 : 학년과 검색어가 전부 있을때
+        System.out.println("get by grade & index");
         return progressViewRepository.FindProgressesByGradeANDConsistIndex(grade, Index);
     }
 
 
+    public void TestSave(String lecture, String prof, Integer year){
+        if(!progressViewRepository.IsExistsProgress(prof, lecture)){
 
+
+            System.out.println("불가능");
+        }else{
+            progressRepository.SaveProgress(prof, lecture, year);
+            System.out.println("가능");
+        }
+    }
 
 }
