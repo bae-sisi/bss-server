@@ -28,6 +28,7 @@ public class FindMemberController {
         if( index == null || index.isEmpty() || index.isBlank() ){
             return findMemberService.GetAll();
         }else{
+            System.out.println(index);
             return findMemberService.GetConsistIndex(index);
         }
     }

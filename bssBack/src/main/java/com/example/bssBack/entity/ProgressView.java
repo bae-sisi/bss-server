@@ -30,4 +30,7 @@ public class ProgressView {
 
     @Column(name = "lecture_Name")
     private String lectureName;
+
+    @Column(name = "rate")
+    private Double rate;
 }

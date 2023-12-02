@@ -16,8 +16,4 @@ public interface ProgressRepository extends JpaRepository<Progress, Long> {
             "(select l.lid from lecture as l where l.name = :lecture) , :year );")
     void SaveProgress(@Param("prof") String prof, @Param("lecture") String lecture, @Param("year") Integer year);
 
-
-    @Query(nativeQuery = true, value = "select pg.id from progress as p where")
-
-
 }

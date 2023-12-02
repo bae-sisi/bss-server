@@ -21,9 +21,8 @@ public interface FindMemberRepository extends JpaRepository<FindMember, Long> {
     //index를 포함하고 있는 data 반환
     @Query(nativeQuery = true, value = "select f.fid, f.title, f.content, f.end_date, f.prof_name," +
             "f.lacture_name, f.created_at, u.sid, u.username from findmember as f join " +
-            "user as u on f.user_id = u.sid where f.title like %:index% " +
-            "or f.content like %:index%;")
-    List<FindMemberDto> findFindMembersAndUsersConsist(@Param("index") String index);
+            "user as u on f.user_id = u.sid where f.title like %:index% or f.content like %:index% ;")
+    List<FindMemberDto> FindMembersAndUsersConsist(@Param("index") String index);
 
 
     // 유저가 작성한 모든 글 가져오기

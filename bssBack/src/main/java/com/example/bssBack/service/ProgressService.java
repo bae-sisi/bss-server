@@ -1,8 +1,7 @@
 package com.example.bssBack.service;
 
-import com.example.bssBack.dtos.ProgressViewDto;
-import com.example.bssBack.entity.ProgressView;
 import com.example.bssBack.entity.Progress;
+import com.example.bssBack.entity.ProgressView;
 import com.example.bssBack.repository.ProgressRepository;
 import com.example.bssBack.repository.ProgressViewRepository;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,7 @@ public class ProgressService {
        progressRepository.save(progress);
     }
 
-    public List<ProgressViewDto> FindAll(Integer grade, String Index){
+    public List<ProgressView> FindAll(Integer grade, String Index){
 
         if(grade==0 && Index == null){
             //검색 조건 없을때 전채 가져오기
@@ -49,13 +48,15 @@ public class ProgressService {
 
 
     public void TestSave(String lecture, String prof, Integer year){
-        if(!progressViewRepository.IsExistsProgress(prof, lecture)){
-
-
-            System.out.println("불가능");
+        Long pid = progressViewRepository.IsExistsProgress(prof, lecture);
+        if(pid != 0){
+            Progress progress = progressRepository.findById(pid).get();
+            if(progress.getYear() <= year){
+                progress.setYear(year);
+            }
+            progressRepository.save(progress);
         }else{
             progressRepository.SaveProgress(prof, lecture, year);
-            System.out.println("가능");
         }
     }
 

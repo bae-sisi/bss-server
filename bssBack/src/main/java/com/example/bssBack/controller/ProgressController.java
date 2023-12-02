@@ -1,11 +1,7 @@
 package com.example.bssBack.controller;
 
 import com.example.bssBack.dtos.EvaluationDto;
-import com.example.bssBack.dtos.ProgressViewDto;
 import com.example.bssBack.entity.ProgressView;
-import com.example.bssBack.entity.Lecture;
-import com.example.bssBack.entity.Professor;
-import com.example.bssBack.entity.Progress;
 import com.example.bssBack.service.EvaluationService;
 import com.example.bssBack.service.LectureService;
 import com.example.bssBack.service.ProfessorService;
@@ -71,7 +67,7 @@ public class ProgressController {
     }
 
     @GetMapping("/get/all/progress")
-    public List<ProgressViewDto> GetAllProgress(@RequestParam(value = "grade") Integer grade, @RequestParam( value = "index") String index){
+    public List<ProgressView> GetAllProgress(@RequestParam(value = "grade") Integer grade, @RequestParam( value = "index") String index){
 
         if(index.isEmpty() && index.isBlank()){
             index = null;
@@ -84,8 +80,8 @@ public class ProgressController {
 
 
     @GetMapping("/get/avg/evaluation")
-    public EvaluationDto GetEvaluationAVG(@RequestParam("id") Long id){
-        return evaluationService.GetEvaluation(id);
+    public EvaluationDto GetEvaluationAVG(@RequestParam("progress_id") Long progress_id){
+        return evaluationService.GetEvaluation(progress_id);
     }
 
 

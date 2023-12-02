@@ -22,7 +22,7 @@ public class FindMemberService {
     }
 
     public List<FindMemberDto> GetConsistIndex(String index){
-        return findMemberRepository.findFindMembersAndUsersConsist(index);
+        return findMemberRepository.FindMembersAndUsersConsist(index);
     }
 
     public void Save(FindMember findMember){

@@ -18,7 +18,7 @@ public class EvaluationService {
         evaluationRepository.save(evaluation);
     }
 
-    public EvaluationDto GetEvaluation(Long id){
-        return evaluationRepository.GetEvaluationByPGID(id);
+    public EvaluationDto GetEvaluation(Long progress_id){
+        return evaluationRepository.GetEvaluationByPGID(progress_id);
     }
 }

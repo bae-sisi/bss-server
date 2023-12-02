@@ -2,13 +2,13 @@ package com.example.bssBack.dtos;
 
 public interface EvaluationDto {
 
-    String getAf();
+    String getAssignment_freq();
 
-    String getGf();
+    String getGroup_freq();
 
-    String getGr();
+    String getGrading();
 
-    String getAtt();
+    String getAttending();
 
-    String getEx();
+    String getExam_num();
 }
