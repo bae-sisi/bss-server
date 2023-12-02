@@ -78,6 +78,10 @@ public class ProgressController {
         return progressService.FindAll(grade, index);
     }
 
+    @GetMapping("/get/open/year/progress")
+    public List<ProgressView> GetProgressesThisYear(){
+        return progressService.FindByYear();
+    }
 
     @GetMapping("/get/avg/evaluation")
     public EvaluationDto GetEvaluationAVG(@RequestParam("progress_id") Long progress_id){

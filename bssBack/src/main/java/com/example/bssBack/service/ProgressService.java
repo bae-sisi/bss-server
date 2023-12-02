@@ -6,6 +6,7 @@ import com.example.bssBack.repository.ProgressRepository;
 import com.example.bssBack.repository.ProgressViewRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.Year;
 import java.util.List;
 
 @Service
@@ -60,4 +61,8 @@ public class ProgressService {
         }
     }
 
+    public List<ProgressView> FindByYear(){
+        Integer year = Year.now().getValue() -2000;
+        return progressViewRepository.FindProgreeseByYear(year);
+    }
 }

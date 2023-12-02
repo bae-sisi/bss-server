@@ -3,7 +3,7 @@
 
 
 ## BackEnd HttpRequest Document
-https://documenter.getpostman.com/view/27123458/2s9YeHaBHg
+https://documenter.getpostman.com/view/27123458/2s9YeK3pwD
 <br />
 
 # bssClient
