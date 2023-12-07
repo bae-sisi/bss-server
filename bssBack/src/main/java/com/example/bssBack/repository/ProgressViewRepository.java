@@ -30,4 +30,7 @@ public interface ProgressViewRepository extends JpaRepository<ProgressView, Long
 
     @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.year = :year ;")
     List<ProgressView> FindProgreeseByYear(@Param("year")Integer year);
+
+    @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.progressID = :pid ;")
+    ProgressView GetONEINFO(@Param("pid") Long pid0);
 }

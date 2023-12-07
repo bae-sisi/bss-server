@@ -65,4 +65,9 @@ public class ProgressService {
         Integer year = Year.now().getValue() -2000;
         return progressViewRepository.FindProgreeseByYear(year);
     }
+
+
+    public ProgressView GetDetail(Long pid){
+        return progressViewRepository.GetONEINFO(pid);
+    }
 }

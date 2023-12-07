@@ -1,5 +1,6 @@
 package com.example.bssBack.controller;
 
+import com.example.bssBack.dtos.EventDto;
 import com.example.bssBack.dtos.FindMemberDto;
 import com.example.bssBack.entity.FindMember;
 import com.example.bssBack.service.FindMemberService;
@@ -126,6 +127,13 @@ public class FindMemberController {
             return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
         }
 
+    }
+
+    //하나의 Detail FindMember 정보 얻기
+    @GetMapping("/get/one/fidmem")
+    public FindMemberDto GetOneFindMember(@RequestParam(value = "fid") Long fid){
+        System.out.println(fid);
+        return findMemberService.GetONEDetailINFO(fid);
     }
 
 

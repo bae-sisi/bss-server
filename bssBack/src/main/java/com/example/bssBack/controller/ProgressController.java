@@ -88,6 +88,10 @@ public class ProgressController {
         return evaluationService.GetEvaluation(progress_id);
     }
 
+    @GetMapping("/get/one/progress")
+    public ProgressView GetOenDetail(@RequestParam("progress_id") Long progress_id){
+        return progressService.GetDetail(progress_id);
+    }
 
 }
 

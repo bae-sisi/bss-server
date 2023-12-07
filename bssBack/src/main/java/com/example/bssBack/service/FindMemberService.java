@@ -36,4 +36,9 @@ public class FindMemberService {
     public void Deleted(FindMember findMember){
         findMemberRepository.delete(findMember);
     }
+
+
+    public FindMemberDto GetONEDetailINFO(Long fid){
+        return findMemberRepository.GetDetailINFO(fid);
+    }
 }
