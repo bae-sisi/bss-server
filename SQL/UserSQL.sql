@@ -46,6 +46,8 @@ create table `findmember`(
     primary key(`fid`) using btree
 );
 
+alter table `findmember` add column `stack` int not null;
+
 create table `lecture`(
 	`lid` bigint not null auto_increment,
     `name` varchar(100) not null, 
@@ -79,15 +81,23 @@ create table `Evaluation`(
 );
 
 
+
+use baesisi;
+
+/*바꾼거 rate 추가 */ 
 create view `progress_view` as Select p.id as progressID, l.name as `lecture_Name`, l.grade as`grade`, p.year as `year`,
-pf.name as `prof_Name`, Avg(c.rate) as `rate`
-from progress p, lecture l, professor pf, comment c where p.Lid = l.Lid and p.Pid = pf.Pid and p.id = c.progress_id group by c.progress_id;
+pf.name as `prof_Name`, COALESCE(Avg(c.rate), 0) as `rate`
+from progress p join lecture l on p.Lid = l.Lid 
+join professor pf on p.Pid = pf.Pid
+LEFT join comment c on p.id = c.progress_id group by p.id;
+
+
 
 create view `test_view` as Select c.progress_id as Pid, avg(c.rate) as Rate from comment as c group by Pid;
 
 select pv.progressID, AVG(c.rate) as Rate,pv.grade, pv.lecture_Name, pv.prof_Name from comment as c join progress_view as pv on c.progress_id = pv.progressID where pv.grade = 3 group by c.progress_id;
 
-select avg(c.rate) as Rate from comment as c where c.progress_id = 3;
+select COALESCE(Avg(c.rate), 0) as Rate from comment as c where c.progress_id = 3;
 
 use baesisi;
 
@@ -99,35 +109,44 @@ select pv.progressID, avg(c.rate) as Rate, pv.lecture_Name, pv.prof_Name
 from comment as c join progress_view as pv on c.progress_id=pv.progressID group by c.progress_id;
 
 
+
+SELECT CASE WHEN EXISTS( SELECT 1 FROM progress AS pr WHERE pr.Pid = (SELECT p.Pid FROM professor AS p WHERE p.name = "정지훈") AND pr.Lid = (SELECT l.lid FROM lecture AS l WHERE l.name = "인공지능") )
+THEN (select pr.id from progress as pr where pr.Pid = (SELECT p.Pid FROM professor AS p WHERE p.name = "정지훈") AND pr.Lid = (SELECT l.lid FROM lecture AS l WHERE l.name = "인공지능") ) ELSE 'True' END AS Result;
+
 SELECT
   CASE
     WHEN ev.AsignFreq > 2 THEN '많음'
     WHEN ev.AsignFreq > 1 THEN '보통'
-    ELSE '없음'
+    WHEN ev.AsignFreq > 0 THEN '없음'
+    ELSE 'None'
   END AS `AF`,
   case
 	when ev.GrpFreq > 2 then '많음'
     when ev.GrpFreq > 1 then '보통'
-    ELSE '없음'
+    when ev.GrpFreq > 0 then '없음'
+    ELSE 'None'
   END AS `GF`,
   case
 	when ev.Grading > 2 then '너그러움'
     when ev.Grading > 1 then '보통'
-    ELSE '깐깐함'
+    when ev.Grading > 0 then '깐깐함'
+    ELSE 'None'
   END AS `GR`,
   case
 	when ev.Attending > 4 then '복합적'
     when ev.Attending > 3 then '직접호명'
     when ev.Attending > 2 then '지정좌석'
     when ev.Attending > 1 then '전자출결'
-	ELSE '반영안함'
+    when ev.Attending > 0 then '반영안함'
+	ELSE 'None'
   END AS `Att`,
   case 
 	when ev.ExamN > 4 then '네번이상'
     when ev.ExamN > 3 then '세번'
     when ev.ExamN > 2 then '두번'
     when ev.ExamN > 1 then '한번'
-    ELSE '없음'
+    when ev.ExamN > 0 then '없음'
+    ELSE 'None'
   END AS `Ex`
 FROM (
   SELECT
@@ -139,40 +158,65 @@ FROM (
   FROM
     evaluation
   WHERE
-    pgid = 1
-) AS ev;
+    pgid = 5
+) AS ev; 
 
 
-create database FinalTask;
 
-use FinalTask;
-
-create table `employess` (
-	`employee_ID` bigint not null auto_increment,
-    `first_name` varchar(20) not null,
-    `last_name` varchar(20) not null,
-    `department` varchar(20) not null,
-    primary key(`employee_ID`)
-);
-
-create table `sales`(
-	`customer_ID` varchar(20) not null,
-    `order_total` double not null,
-    `salesperson_ID` bigint not null,
-    primary key(`customer_ID`),
-    foreign key(`salesperson_ID`) references `employess`(`employee_ID`)
+create table `customer`(
+	`cid`int not null auto_increment,
+    `password` varchar(20) not null,
+    `tel` int not null,
+    `name` varchar(20) not null,
+    `age` int not null,
+    primary key(`cid`)
 );
 
 
-insert into `employess` value(1, 'Anna', 'Wrigley', 'Sales' );
-insert into `employess` value(2, 'Kristine', 'Lambeau', 'Design' );
-insert into `employess` value(3, 'Thea', 'Comiskey', 'Sales' );
+create table `reservation`(
+	`sid` int not null auto_increment,
+    `cust_id` int not null,
+    `rest_id` int not null,
+    `cost` int not null,
+    `visit_date` date not null,
+    `visit_num` int not null,
+    `reserv_date` date not null,
+    `request` varchar(200) default null,
+    primary key(`sid`),
+    foreign key(`cust_id`) references `customer`(`cid`),
+    foreign key(`rest_id`) references `restaurant`(`rid`)
+);
 
-insert into `sales` value('001', 422.01, 3);
-insert into `sales` value('002', 899.76, 1);
-insert into `sales` value('003', 560.00, 3);
 
 
+create table `manager`(
+	`mid` int not null auto_increment,
+    `name` varchar(10) not null,
+    `Tel` int not null,
+    primary key(`mid`)
+);
+
+create table `restaurant`(
+	`rid` int not null auto_increment,
+    `rname` varchar(10) not null,
+    `tel` int not null,
+    `rest_Lng` double not null,
+    `rest_Lat` double not null,
+    `rest_intor` varchar(200) not null,
+    `manager_id` int not null,
+    primary key(`rid`),
+    foreign key(`manager_id`) references `manager`(`mid`)
+);
+
+create table `menu`(
+	`menu_id` int not null auto_increment,
+    `name` varchar(10) not null,
+    `price` int not null,
+    `category` varchar(20) not null,
+    `restaurant_id` int not null,
+    primary key(`menu_id`),
+    foreign key(`restaurant_id`) references `restaurant`(`rid`)
+);
 
 
 
