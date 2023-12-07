@@ -13,6 +13,7 @@ CREATE TABLE `professor` (
   PRIMARY KEY (`Pid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
 create table `progress`(
 	`id` bigint not null  AUTO_INCREMENT,
 	`Pid` bigint ,
@@ -40,16 +41,18 @@ create view `progress_view` as Select p.id, l.Lid, l.name as `lecture_Name`, pf.
 create table `event`(
 	`eid` bigint not null auto_increment,
     `title` varchar(100) not null,
-    `content` varchar(500) not null,
+    `content` varchar(1500) not null,
     `created_at` datetime not null,
     `user_id` varchar(20) default null,
     primary key(`eid`) using btree
 );
 
+alter table `event` change column `content` `content` varchar(1500) not null;
+
 create table `findmember`(
 	`fid` bigint not null auto_increment,
     `title` varchar(100) not null,
-    `content` varchar(500) not null, 
+    `content` varchar(1500) not null, 
     `end_date` varchar(100) not null,
     `prof_name` varchar(20) not null,
     `lacture_name` varchar(20) not null,
@@ -57,6 +60,9 @@ create table `findmember`(
     `user_id` varchar(20) default null ,
     primary key(`fid`) using btree
 );
+
+ALTER TABLE `baesisi`.`findmember` 
+CHANGE COLUMN `content` `content` VARCHAR(1500) NOT NULL ;
 
 create table `comment`(
 	`cid` bigint not null auto_increment,

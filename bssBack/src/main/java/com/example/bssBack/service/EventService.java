@@ -28,12 +28,8 @@ public class EventService {
     }
 
 
-    public void Save(Event event) throws Exception{
-        try{
-            eventRepository.save(event);
-        }catch (ELException e){
-            new Exception("저장에 실패했습니다 다시 시도해 주세요.");
-        }
+    public Long Save(Event event){
+        return eventRepository.save(event).getEid();
     }
 
     public Event Find(Long eid){

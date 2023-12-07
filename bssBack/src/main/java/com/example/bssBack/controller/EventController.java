@@ -44,10 +44,11 @@ public class EventController {
 
             Event event = new Event(title, content, dateTime, user_id);
 
-            eventService.Save(event);
+            Long eid = eventService.Save(event);
 
             HashMap<String, Object> result = new HashMap<>();
             result.put("result", "Event 저장에 성공하였습니다.");
+            result.put("eid", eid);
             return new ResponseEntity(result, HttpStatus.CREATED);
         }else{
 

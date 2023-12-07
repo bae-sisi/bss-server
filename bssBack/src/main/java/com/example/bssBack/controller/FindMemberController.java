@@ -51,9 +51,10 @@ public class FindMemberController {
 
             FindMember findMember = new FindMember(title,content,end_date,prof_name,lacture_name,user_id, dateTime, stack);
 
-            findMemberService.Save(findMember);
+            Long fid = findMemberService.Save(findMember);
             HashMap<String, Object> result = new HashMap<>();
             result.put("result", "FindMember 저장에 성공하였습니다.");
+            result.put("fid", fid);
             return new ResponseEntity(result, HttpStatus.CREATED);
         }else{
             HashMap<String, Object> result = new HashMap<>();

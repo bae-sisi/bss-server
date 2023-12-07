@@ -25,8 +25,8 @@ public class FindMemberService {
         return findMemberRepository.FindMembersAndUsersConsist(index);
     }
 
-    public void Save(FindMember findMember){
-        findMemberRepository.save(findMember);
+    public Long Save(FindMember findMember){
+        return findMemberRepository.save(findMember).getFid();
     }
 
     public FindMember GetOneINFO(Long fid){
