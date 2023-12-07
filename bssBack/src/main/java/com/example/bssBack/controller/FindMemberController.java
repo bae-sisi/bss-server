@@ -36,12 +36,7 @@ public class FindMemberController {
 
 
     @PostMapping("/auth/save/fidmem")
-    public ResponseEntity Save(@RequestParam("title") String title,
-                               @RequestParam("content") String content,
-                               @RequestParam("end_date") String end_date,
-                               @RequestParam("prof_name") String prof_name,
-                               @RequestParam("lacture_name") String lacture_name,
-                               @RequestParam("stack") Integer stack){
+    public ResponseEntity Save(@RequestBody FindMember findMember){
 
         String user_id = Security.getCurrentSid();
 
@@ -49,7 +44,8 @@ public class FindMemberController {
 
             LocalDateTime dateTime = LocalDateTime.now();
 
-            FindMember findMember = new FindMember(title,content,end_date,prof_name,lacture_name,user_id, dateTime, stack);
+            findMember.setCreated_at(dateTime);
+            findMember.setUser_id(user_id);
 
             Long fid = findMemberService.Save(findMember);
             HashMap<String, Object> result = new HashMap<>();
@@ -93,26 +89,20 @@ public class FindMemberController {
 
 
     @PostMapping("/auth/update/fidmem")
-    public ResponseEntity Update(@RequestParam("fid") Long fid,
-                                 @RequestParam("title") String title,
-                                 @RequestParam("content") String content,
-                                 @RequestParam("end_date") String end_date,
-                                 @RequestParam("prof_name") String prof_name,
-                                 @RequestParam("lacture_name") String lacture_name,
-                                 @RequestParam("stack") Integer stack){
+    public ResponseEntity Update(@RequestBody FindMember findMembers){
 
         String user_id = Security.getCurrentSid();
-        FindMember findMember = findMemberService.GetOneINFO(fid);
+        FindMember findMember = findMemberService.GetOneINFO(findMembers.getFid());
 
         if(!user_id.equals("anonymousUser") && !user_id.isEmpty()){
             if(user_id.equals(findMember.getUser_id()) || user_id.equals("000")){
 
-                findMember.setTitle(title);
-                findMember.setContent(content);
-                findMember.setEnd_date(end_date);
-                findMember.setProf_name(prof_name);
-                findMember.setLacture_name(lacture_name);
-                findMember.setStack(stack);
+                findMember.setTitle(findMembers.getTitle());
+                findMember.setContent(findMembers.getContent());
+                findMember.setEnd_date(findMembers.getEnd_date());
+                findMember.setProf_name(findMembers.getProf_name());
+                findMember.setLacture_name(findMembers.getLacture_name());
+                findMember.setStack(findMembers.getStack());
 
                 findMemberService.Save(findMember);
 

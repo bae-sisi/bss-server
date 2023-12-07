@@ -32,8 +32,7 @@ public class EventController {
     }
 
     @PostMapping("/auth/save/event")
-    public ResponseEntity Create( @RequestParam("title") String title,
-                                 @RequestParam("content") String content) throws Exception {
+    public ResponseEntity Create( @RequestBody Event event) throws Exception {
 
         String user_id = Security.getCurrentSid();
 
@@ -42,7 +41,8 @@ public class EventController {
 
             System.out.println(dateTime);
 
-            Event event = new Event(title, content, dateTime, user_id);
+            event.setCreated_at(dateTime);
+            event.setUser_id(user_id);
 
             Long eid = eventService.Save(event);
 
@@ -86,19 +86,17 @@ public class EventController {
     }
 
     @PostMapping("/auth/update/event")
-    public ResponseEntity Update(@RequestParam("eid") Long eid,
-                                 @RequestParam("title") String title,
-                                 @RequestParam("content") String content) throws Exception {
+    public ResponseEntity Update(@RequestBody Event events) throws Exception {
 
         String user_id = Security.getCurrentSid();
 
-        Event event = eventService.Find(eid);
+        Event event = eventService.Find(events.getEid());
 
         if(!user_id.equals("anonymousUser") && !user_id.isEmpty()){
             if(user_id.equals(event.getUser_id()) || user_id.equals("000")){
 
-                event.setTitle(title);
-                event.setContent(content);
+                event.setTitle(events.getTitle());
+                event.setContent(events.getContent());
 
                 eventService.Save(event);
 
