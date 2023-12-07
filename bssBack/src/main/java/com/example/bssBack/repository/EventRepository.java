@@ -19,12 +19,15 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query(nativeQuery = true, value = "select * from event as e where e.user_id = :sid;")
     List<Event> findEventsByUser_id(@Param("sid") Long sid);
 
+    //하나의 Evnet Detail 정보 가져오기
+    @Query(nativeQuery = true, value = "select e.eid, e.title, e.content, e.created_at, u.username, u.sid from event as e join user as u ON e.user_id = u.sid where e.eid = :eid ;")
+    EventDto FindEventAndUserByEId(@Param("eid")Long eid);
+
+    //전체 검색
     @Query(nativeQuery = true, value = "select e.eid, e.title, e.content, e.created_at, u.username, u.sid from event as e join user as u ON e.user_id = u.sid;")
     List<EventDto> FindAll();
 
-    @Query(nativeQuery = true, value = "select e.eid, e.title, e.content, e.created_at, u.username, u.sid from event as e join user as u ON e.user_id = u.sid where e.eid = :id;")
-    List<EventDto> FindEventAndUserById(@Param("id")Long id);
-
+    //검색어를 통한 검색
     @Query(nativeQuery = true, value = "select e.eid, e.title, e.content, e.created_at, u.username, u.sid from event as e join user as u ON e.user_id = u.sid where e.title like %:index% or e.content like %:index% ; ")
     List<EventDto> findEventUserConsistIndex(@Param("index") String index);
 

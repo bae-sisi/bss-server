@@ -43,4 +43,9 @@ public class EventService {
     public void Deleted(Event event){
         eventRepository.delete(event);
     }
+
+
+    public EventDto GetOne(Long eid){
+        return eventRepository.FindEventAndUserByEId(eid);
+    }
 }

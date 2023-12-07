@@ -117,4 +117,10 @@ public class EventController {
         }
     }
 
+    @GetMapping("/get/one/event")
+    public EventDto GetOneEvent(@RequestParam(value = "eid") Long eid){
+        System.out.println(eid);
+        return eventService.GetOne(eid);
+    }
+
 }
