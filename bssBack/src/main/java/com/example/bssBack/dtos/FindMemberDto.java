@@ -15,6 +15,8 @@ public interface FindMemberDto {
 
     String getLacture_name();
     LocalDateTime getCreated_at();
+
+    Integer getStack();
     Long getSid();
     String getUsername();
 }

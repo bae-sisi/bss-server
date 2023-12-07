@@ -40,7 +40,8 @@ public class FindMemberController {
                                @RequestParam("content") String content,
                                @RequestParam("end_date") String end_date,
                                @RequestParam("prof_name") String prof_name,
-                               @RequestParam("lacture_name") String lacture_name){
+                               @RequestParam("lacture_name") String lacture_name,
+                               @RequestParam("stack") Integer stack){
 
         String user_id = Security.getCurrentSid();
 
@@ -48,7 +49,7 @@ public class FindMemberController {
 
             LocalDateTime dateTime = LocalDateTime.now();
 
-            FindMember findMember = new FindMember(title,content,end_date,prof_name,lacture_name,user_id, dateTime);
+            FindMember findMember = new FindMember(title,content,end_date,prof_name,lacture_name,user_id, dateTime, stack);
 
             findMemberService.Save(findMember);
             HashMap<String, Object> result = new HashMap<>();
@@ -96,7 +97,8 @@ public class FindMemberController {
                                  @RequestParam("content") String content,
                                  @RequestParam("end_date") String end_date,
                                  @RequestParam("prof_name") String prof_name,
-                                 @RequestParam("lacture_name") String lacture_name){
+                                 @RequestParam("lacture_name") String lacture_name,
+                                 @RequestParam("stack") Integer stack){
 
         String user_id = Security.getCurrentSid();
         FindMember findMember = findMemberService.GetOneINFO(fid);
@@ -109,6 +111,7 @@ public class FindMemberController {
                 findMember.setEnd_date(end_date);
                 findMember.setProf_name(prof_name);
                 findMember.setLacture_name(lacture_name);
+                findMember.setStack(stack);
 
                 findMemberService.Save(findMember);
 

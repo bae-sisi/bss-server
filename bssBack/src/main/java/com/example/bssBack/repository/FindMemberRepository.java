@@ -13,14 +13,14 @@ public interface FindMemberRepository extends JpaRepository<FindMember, Long> {
 
     //전체 조회
     @Query(nativeQuery = true, value = "select f.fid, f.title, f.content, f.end_date, f.prof_name," +
-            "f.lacture_name, f.created_at, u.sid, u.username from findmember as f join " +
+            "f.lacture_name, f.created_at, f.stack, u.sid, u.username from findmember as f join " +
             "user as u on f.user_id = u.sid")
     List<FindMemberDto> findFindMembersAndUsers();
 
 
     //index를 포함하고 있는 data 반환
     @Query(nativeQuery = true, value = "select f.fid, f.title, f.content, f.end_date, f.prof_name," +
-            "f.lacture_name, f.created_at, u.sid, u.username from findmember as f join " +
+            "f.lacture_name, f.created_at, f.stack, u.sid, u.username from findmember as f join " +
             "user as u on f.user_id = u.sid where f.title like %:index% or f.content like %:index% ;")
     List<FindMemberDto> FindMembersAndUsersConsist(@Param("index") String index);
 
@@ -36,7 +36,7 @@ public interface FindMemberRepository extends JpaRepository<FindMember, Long> {
 
 
     @Query(nativeQuery = true, value = "select f.fid, f.title, f.content, f.end_date, f.prof_name," +
-            "f.lacture_name, f.created_at, u.sid, u.username from findmember as f join " +
+            "f.lacture_name, f.created_at, f.stack, u.sid, u.username from findmember as f join " +
             "user as u on f.user_id = u.sid where f.fid = :fid ;")
     FindMemberDto GetDetailINFO(@Param("fid") Long fid);
 

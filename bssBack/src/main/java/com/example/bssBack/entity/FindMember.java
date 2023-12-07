@@ -32,10 +32,12 @@ public class FindMember {
     @Column(name = "user_id")
     private String user_id;
 
+    @Column(name = "stack")
+    private Integer stack;
 
     protected FindMember(){};
 
-    public FindMember(String title, String content, String end_date, String prof_name, String lacture_name, String user_id, LocalDateTime created_at){
+    public FindMember(String title, String content, String end_date, String prof_name, String lacture_name, String user_id, LocalDateTime created_at, Integer stack){
         this.title = title;
         this.content = content;
         this.end_date = end_date;
@@ -43,5 +45,6 @@ public class FindMember {
         this.lacture_name = lacture_name;
         this.user_id = user_id;
         this.created_at = created_at;
+        this.stack = stack;
     }
 }
