@@ -14,7 +14,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     @Query(nativeQuery = true, value = "Select Avg(c.rate) from comment as c where c.Sid = :id;")
     Double GetAvgRateBySID(@Param("id") Long id);
 
-    @Query(nativeQuery = true, value = "Select * from comment as c where c.progress_id = :pgid ;")
+    @Query(nativeQuery = true, value = "Select * from comment as c where c.progress_id = :pgid order by c.cid DESC ;")
     List<Comment> FindCommentsByProgressID(@Param("pgid") Long pgid);
 
     @Transactional
