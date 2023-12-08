@@ -122,4 +122,9 @@ public class EventController {
         return eventService.GetOne(eid);
     }
 
+    @GetMapping("/get/limit/event")
+    public List<EventDto> GetLimitEvent(){
+        return eventService.GetLimitList();
+    }
+
 }

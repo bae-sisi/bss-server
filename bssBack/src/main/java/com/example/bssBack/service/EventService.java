@@ -44,4 +44,9 @@ public class EventService {
     public EventDto GetOne(Long eid){
         return eventRepository.FindEventAndUserByEId(eid);
     }
+
+
+    public List<EventDto> GetLimitList(){
+        return eventRepository.findEventDTOLimit();
+    }
 }

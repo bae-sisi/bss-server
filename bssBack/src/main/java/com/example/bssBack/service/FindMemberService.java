@@ -41,4 +41,8 @@ public class FindMemberService {
     public FindMemberDto GetONEDetailINFO(Long fid){
         return findMemberRepository.GetDetailINFO(fid);
     }
+
+    public List<FindMemberDto> GetListFindMember(){
+        return findMemberRepository.GetLimitFindMemberDTO();
+    }
 }

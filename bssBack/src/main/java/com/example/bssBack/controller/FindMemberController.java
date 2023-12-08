@@ -131,4 +131,8 @@ public class FindMemberController {
     }
 
 
+    @GetMapping("/get/limit/fidmem")
+    public List<FindMemberDto> GetLimitFindMemberDto(){
+        return findMemberService.GetListFindMember();
+    }
 }

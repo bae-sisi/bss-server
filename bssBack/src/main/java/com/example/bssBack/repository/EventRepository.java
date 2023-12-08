@@ -31,4 +31,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query(nativeQuery = true, value = "select e.eid, e.title, e.content, e.created_at, u.username, u.sid from event as e join user as u ON e.user_id = u.sid where e.title like %:index% or e.content like %:index% order by e.created_at DESC; ")
     List<EventDto> findEventUserConsistIndex(@Param("index") String index);
 
+    @Query(nativeQuery = true, value = "select e.eid, e.title, e.content, e.created_at, u.username, u.sid from event as e join user as u ON e.user_id = u.sid order by e.created_at DESC limit 5;")
+    List<EventDto> findEventDTOLimit();
+
 }
