@@ -6,7 +6,7 @@ public interface EventDto {
     Long getEid();
     String getTitle();
     String getContent();
-    String getUsername();
+    String getAuthor();
     String getSid();
     LocalDateTime getCreated_at();
 

@@ -101,7 +101,7 @@ public class FindMemberController {
                 findMember.setContent(findMembers.getContent());
                 findMember.setEnd_date(findMembers.getEnd_date());
                 findMember.setProf_name(findMembers.getProf_name());
-                findMember.setLacture_name(findMembers.getLacture_name());
+                findMember.setLecture_name(findMembers.getLecture_name());
                 findMember.setStack(findMembers.getStack());
 
                 findMemberService.Save(findMember);

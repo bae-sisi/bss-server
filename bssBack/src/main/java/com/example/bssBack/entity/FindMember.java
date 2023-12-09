@@ -23,8 +23,8 @@ public class FindMember {
     @Column(name = "prof_name")
     private String prof_name;
 
-    @Column(name = "lacture_name")
-    private String lacture_name;
+    @Column(name = "lecture_name")
+    private String lecture_name;
 
     @Column(name = "created_at")
     private LocalDateTime created_at;
@@ -37,12 +37,12 @@ public class FindMember {
 
     protected FindMember(){};
 
-    public FindMember(String title, String content, String end_date, String prof_name, String lacture_name, String user_id, LocalDateTime created_at, Integer stack){
+    public FindMember(String title, String content, String end_date, String prof_name, String lecture_name, String user_id, LocalDateTime created_at, Integer stack){
         this.title = title;
         this.content = content;
         this.end_date = end_date;
         this.prof_name = prof_name;
-        this.lacture_name = lacture_name;
+        this.lecture_name = lecture_name;
         this.user_id = user_id;
         this.created_at = created_at;
         this.stack = stack;

@@ -13,10 +13,12 @@ public interface FindMemberDto {
 
     String getProf_name();
 
-    String getLacture_name();
+    String getLecture_name();
     LocalDateTime getCreated_at();
 
     Integer getStack();
     Long getSid();
-    String getUsername();
+    String getAuthor();
+
+    String getAuthor_email();
 }

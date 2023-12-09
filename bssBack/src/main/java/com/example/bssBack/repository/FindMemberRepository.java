@@ -13,15 +13,15 @@ public interface FindMemberRepository extends JpaRepository<FindMember, Long> {
 
     //전체 조회
     @Query(nativeQuery = true, value = "select f.fid, f.title, f.content, f.end_date, f.prof_name," +
-            "f.lacture_name, f.created_at, f.stack, u.sid, u.username from findmember as f join " +
+            "f.lecture_name, f.created_at, f.stack, u.sid, u.username as author, u.email as author_email from findmember as f join " +
             "user as u on f.user_id = u.sid order by f.created_at DESC ;")
     List<FindMemberDto> findFindMembersAndUsers();
 
 
     //index를 포함하고 있는 data 반환
     @Query(nativeQuery = true, value = "select f.fid, f.title, f.content, f.end_date, f.prof_name," +
-            "f.lacture_name, f.created_at, f.stack, u.sid, u.username from findmember as f join " +
-            "user as u on f.user_id = u.sid where f.title like %:index% or f.content like %:index% order by f.created_at DESC ;")
+            "f.lecture_name, f.created_at, f.stack, u.sid, u.username as author, u.email as author_email from findmember as f join " +
+            "user as u on f.user_id = u.sid where f.title like %:index% or u.username like %:index% order by f.created_at DESC ;")
     List<FindMemberDto> FindMembersAndUsersConsist(@Param("index") String index);
 
 
@@ -36,13 +36,13 @@ public interface FindMemberRepository extends JpaRepository<FindMember, Long> {
 
 
     @Query(nativeQuery = true, value = "select f.fid, f.title, f.content, f.end_date, f.prof_name," +
-            "f.lacture_name, f.created_at, f.stack, u.sid, u.username from findmember as f join " +
+            "f.lecture_name, f.created_at, f.stack, u.sid, u.username as author, u.email as author_email from findmember as f join " +
             "user as u on f.user_id = u.sid where f.fid = :fid ;")
     FindMemberDto GetDetailINFO(@Param("fid") Long fid);
 
 
     @Query(nativeQuery = true, value = "select f.fid, f.title, f.content, f.end_date, f.prof_name," +
-            "f.lacture_name, f.created_at, f.stack, u.sid, u.username from findmember as f join " +
-            "user as u on f.user_id = u.sid order by f.created_at DESC limit 5")
+            "f.lecture_name, f.created_at, f.stack, u.sid, u.username as author, u.email as author_email from findmember as f join " +
+            "user as u on f.user_id = u.sid order by f.created_at DESC limit 5;")
     List<FindMemberDto> GetLimitFindMemberDTO();
 }

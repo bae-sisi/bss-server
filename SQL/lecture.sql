@@ -55,7 +55,7 @@ create table `findmember`(
     `content` varchar(1500) not null, 
     `end_date` varchar(100) not null,
     `prof_name` varchar(20) not null,
-    `lacture_name` varchar(20) not null,
+    `lecture_name` varchar(20) not null,
     `created_at` datetime not null,
     `user_id` varchar(20) default null ,
     primary key(`fid`) using btree
@@ -63,6 +63,8 @@ create table `findmember`(
 
 ALTER TABLE `baesisi`.`findmember` 
 CHANGE COLUMN `content` `content` VARCHAR(1500) NOT NULL ;
+
+alter table `findmember` change column `lacture_name` `lecture_name` varchar(20) not null;
 
 create table `comment`(
 	`cid` bigint not null auto_increment,
