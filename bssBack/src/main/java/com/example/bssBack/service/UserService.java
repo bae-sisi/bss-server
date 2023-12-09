@@ -90,12 +90,32 @@ public class UserService implements UserDetailsService {
      * 주어진 sid인 user를 찾아 password가 일치하면 newPassword(선택적)와 email을 수정합니다.
      * @Param sid 필수 (변경 불가)
      * @param username 필수
-     * @param password 기존 비밀번호 필수
-     * @param newPassword 새 비밀번호(선택적)
      * @param email 새 이메일(필수)
      * @throws Exception
      */
-    public void update(String sid, String username, String password, String newPassword, String email) throws Exception {
+    public void update(String sid, String username, String email) throws Exception {
+        User user = userRepository.findBySid(sid)
+                .orElseThrow(() -> new UsernameNotFoundException("User not present"));
+
+        if (username != null && !username.isBlank()){
+            user.setUsername(username);
+        }
+
+        if (email != null && !email.isBlank()) {
+            user.setEmail(email);
+        }
+        userRepository.save(user);
+    }
+
+
+    /**
+     * 주어진 sid인 user를 찾아 password가 일치하면 newPassword(선택적)를 수정합니다.
+     * @Param sid 필수 (변경 불가)
+     * @param password 기존 비밀번호 필수
+     * @param newPassword 새 비밀번호(선택적)
+     * @throws Exception
+     */
+    public void change(String sid, String password, String newPassword) throws Exception {
         User user = userRepository.findBySid(sid)
                 .orElseThrow(() -> new UsernameNotFoundException("User not present"));
 
@@ -104,13 +124,6 @@ public class UserService implements UserDetailsService {
                 user.setPassword(passwordEncoder.encode(newPassword));
             }
 
-            if (username != null && !username.isBlank()){
-                user.setUsername(username);
-            }
-
-            if (email != null && !email.isBlank()) {
-                user.setEmail(email);
-            }
             userRepository.save(user);
         }
         else {

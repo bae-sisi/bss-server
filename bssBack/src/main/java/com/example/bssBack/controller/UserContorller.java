@@ -136,9 +136,8 @@ public class UserContorller {
     }
 
 
-    @PutMapping("/auth/user/{sid}")
-    public ResponseEntity updateUser(@PathVariable("sid") String sid,
-                                     @RequestBody Map<String, String> body) {
+    @PutMapping("/auth/user/change/password/{sid}")
+    public ResponseEntity UpdateUserINFO(@PathVariable("sid") String sid, @RequestBody Map<String, String> body){
         System.out.printf(sid);
         System.out.println(Security.getCurrentSid());
         if (!sid.isBlank() && sid.equals(Security.getCurrentSid()) &&
@@ -147,12 +146,10 @@ public class UserContorller {
             System.out.println(body);
 
             try {
-                userService.update(
+                userService.change(
                         sid,
-                        body.get("username"),
                         body.get("password"),
-                        body.get("newPassword"),
-                        body.get("email")
+                        body.get("newPassword")
                 );
 
                 HashMap<String, Object> result = new HashMap<>();
@@ -168,6 +165,39 @@ public class UserContorller {
         else {
             HashMap<String, Object> result = new HashMap<>();
             result.put("result", "비밀번호 또는 아이디가 일치하지 않습니다.");
+            return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/auth/user/change/info/{sid}")
+    public ResponseEntity updateUser(@PathVariable("sid") String sid,
+                                     @RequestBody Map<String, String> body) {
+        System.out.printf(sid);
+        System.out.println(Security.getCurrentSid());
+        if (!sid.isBlank() && sid.equals(Security.getCurrentSid())) {
+
+            System.out.println(body);
+
+            try {
+                userService.update(
+                        sid,
+                        body.get("username"),
+                        body.get("email")
+                );
+
+                HashMap<String, Object> result = new HashMap<>();
+                result.put("result", "회원 정보 수정에 성공하였습니다.");
+                return new ResponseEntity(result, HttpStatus.ACCEPTED);
+            }
+            catch (Exception e) {
+                HashMap<String, Object> result = new HashMap<>();
+                result.put("result", "회원 정보 수정에 실패하였습니다.");
+                return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+            }
+        }
+        else {
+            HashMap<String, Object> result = new HashMap<>();
+            result.put("result", "아이디가 일치하지 않습니다.");
             return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
         }
     }
