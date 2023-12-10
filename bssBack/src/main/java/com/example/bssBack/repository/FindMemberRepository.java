@@ -43,6 +43,6 @@ public interface FindMemberRepository extends JpaRepository<FindMember, Long> {
 
     @Query(nativeQuery = true, value = "select f.fid, f.title, f.content, f.end_date, f.prof_name," +
             "f.lecture_name, f.created_at, f.stack, u.sid, u.username as author, u.email as author_email from findmember as f join " +
-            "user as u on f.user_id = u.sid order by f.created_at DESC limit 5;")
+            "user as u on f.user_id = u.sid order by f.created_at DESC limit 3;")
     List<FindMemberDto> GetLimitFindMemberDTO();
 }

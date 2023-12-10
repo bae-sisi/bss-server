@@ -45,8 +45,9 @@ create table `findmember`(
     `end_date` varchar(100) not null,
     `prof_name` varchar(20) not null,
     `lecture_name` varchar(20) not null,
-    `created_at` datetime not null,
+    `created_at` datetime not null, 
     `user_id` varchar(20) default null ,
+    `stack` int not null,
     primary key(`fid`) using btree
 );
 

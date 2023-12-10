@@ -17,7 +17,7 @@ public interface FindMemberDto {
     LocalDateTime getCreated_at();
 
     Integer getStack();
-    Long getSid();
+    String getSid();
     String getAuthor();
 
     String getAuthor_email();
