@@ -58,7 +58,7 @@ public class EventController {
         }
     }
 
-    @PostMapping("/auth/delete/event")
+    @GetMapping("/auth/delete/event")
     public ResponseEntity Delete(@RequestParam("eid") Long eid){
 
         String user_id = Security.getCurrentSid();
