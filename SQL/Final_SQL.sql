@@ -112,13 +112,13 @@ VALUES
 CREATE TABLE `professor` (
   `Pid` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
-  `Is_officier` tinyint(1) NOT NULL,
-  `Lab_into` varchar(200) DEFAULT NULL,
+  `Is_official` tinyint(1) NOT NULL,
+  `Lab_intro` varchar(200) DEFAULT NULL,
   `edu_background` varchar(200) DEFAULT NULL,
   `office` varchar(20) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `major` varchar(100) DEFAULT NULL,
-  `Lab_Link` varchar(300) DEFAULT NULL,
+  `Lab_url` varchar(300) DEFAULT NULL,
   `email` varchar(100) default null,
   PRIMARY KEY (`Pid`)
 );
@@ -288,18 +288,16 @@ VALUES
    23);
 
 
-
-INSERT IGNORE INTO `progress` (`Pid`, `Lid`, `year`)
-SELECT
-  `professor`.`Pid`,
-  `lecture`.`Lid`,
-  FLOOR(RAND() * (23 - 18 + 1)) + 18
-FROM
-  `professor`, `lecture`
-ORDER BY
-  RAND()
-LIMIT 15;
-
+-- INSERT IGNORE INTO `progress` (`Pid`, `Lid`, `year`)
+-- SELECT
+--   `professor`.`Pid`,
+--   `lecture`.`Lid`,
+--   FLOOR(RAND() * (23 - 18 + 1)) + 18
+-- FROM
+--   `professor`, `lecture`
+-- ORDER BY
+--   RAND()
+-- LIMIT 15;
 
 
 create table `comment`(

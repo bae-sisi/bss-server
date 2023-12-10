@@ -29,7 +29,17 @@ public interface ProgressViewRepository extends JpaRepository<ProgressView, Long
     Long IsExistsProgress(@Param("prof") String prof, @Param("lecture") String lecture);
 
     @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.year = :year ;")
-    List<ProgressView> FindProgreeseByYear(@Param("year")Integer year);
+    List<ProgressView> FindProgressesByYear(@Param("year")Integer year);
+
+    @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.year = :year and pv.grade = :grade order by pv.lecture_Name;")
+    List<ProgressView> FindProgressesByYearAndGrade(@Param("year")Integer year, @Param("grade") Integer grade);
+
+    @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.year = :year and pv.lecture_Name like %:index% order by pv.lecture_Name ;")
+    List<ProgressView> FindProgressesByYearAndString(@Param("year")Integer year ,@Param("index") String index);
+
+    @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.year = :year and pv.grade = :grade and pv.lecture_Name like %:index% order by pv.lecture_Name;")
+    List<ProgressView> FindProgressesByYearAndGradeAndString(@Param("year")Integer year, @Param("grade") Integer grade, @Param("index") String index);
+
 
     @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.progressID = :pid ;")
     ProgressView GetONEINFO(@Param("pid") Long pid0);

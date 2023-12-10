@@ -33,17 +33,17 @@ public class ProfessorController {
 
     @PostMapping("/save/prof/Info")
     public Long saveProf(@RequestParam("name") String name,
-                                   @RequestParam("IsOfficier") Boolean Isofficier,
-                                   @RequestParam("LabINTRO") String LabINTRO,
-                                   @RequestParam("EduBackGround") String EduBackGround,
+                                   @RequestParam("isOfficial") Boolean isOfficial,
+                                   @RequestParam("labIntro") String labIntro,
+                                   @RequestParam("eduBackground") String eduBackground,
                                    @RequestParam("office") String office,
                                    @RequestParam("phone") String phone,
                                    @RequestParam("major") String major,
-                                   @RequestParam("LabLink") String LabLink,
+                                   @RequestParam("labUrl") String labUrl,
                                    @RequestParam("email") String email) throws Exception {
 
 
-            Professor professor = new Professor(name, Isofficier, LabINTRO, EduBackGround, office, phone, major, LabLink, email);
+            Professor professor = new Professor(name, isOfficial, labIntro, eduBackground, office, phone, major, labUrl, email);
 
             System.out.println(professor);
 

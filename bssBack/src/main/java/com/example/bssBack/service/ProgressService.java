@@ -7,6 +7,7 @@ import com.example.bssBack.repository.ProgressViewRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -61,9 +62,26 @@ public class ProgressService {
         }
     }
 
-    public List<ProgressView> FindByYear(){
+    public List<ProgressView> FindCorrespondProgress(String index, Integer grade){
         Integer year = Year.now().getValue() -2000;
-        return progressViewRepository.FindProgreeseByYear(year);
+
+        List<ProgressView> progressViewList = new ArrayList<>();
+
+        if((index == null || index.isBlank() || index.isEmpty())){
+            if(grade == 0){
+                progressViewList = progressViewRepository.FindProgressesByYear(year);
+            }else{
+                progressViewList = progressViewRepository.FindProgressesByYearAndGrade(year, grade);
+            }
+        }else{
+            if(grade== 0){
+                progressViewList = progressViewRepository.FindProgressesByYearAndString(year, index);
+            }else{
+                progressViewList = progressViewRepository.FindProgressesByYearAndGradeAndString(year, grade, index);
+            }
+        }
+
+        return progressViewList;
     }
 
 

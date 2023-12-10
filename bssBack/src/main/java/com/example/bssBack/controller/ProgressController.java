@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -67,9 +69,9 @@ public class ProgressController {
         return progressService.FindAll(grade, index);
     }
 
-    @GetMapping("/get/open/year/progress")
-    public List<ProgressView> GetProgressesThisYear(){
-        return progressService.FindByYear();
+    @GetMapping("/get/open/progress")
+    public List<ProgressView> GetOpenProgressAtYear(@RequestParam("grade") Integer grade, @RequestParam( value = "index",  required = false) String index) {
+        return progressService.FindCorrespondProgress(index, grade);
     }
 
     @GetMapping("/get/avg/evaluation")

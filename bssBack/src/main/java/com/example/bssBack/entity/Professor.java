@@ -15,18 +15,18 @@ public class Professor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Pid")
-    private Long Pid;
+    private Long pid;
 
     private String name;
 
-    @Column(name = "Is_officier")
-    private Boolean IsOfficier;
+    @Column(name = "Is_official")
+    private Boolean isOfficial;
 
-    @Column(name = "Lab_into")
-    private String LabINTRO;
+    @Column(name = "Lab_intro")
+    private String labIntro;
 
     @Column(name = "edu_background")
-    private String EduBackGround;
+    private String eduBackground;
 
 
  /*   @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY)
@@ -38,23 +38,23 @@ public class Professor {
 
     private String email;
 
-    @Column(name = "Lab_Link")
-    private String LabLink;
+    @Column(name = "Lab_url")
+    private String labUrl;
 
     protected Professor(){}
 
-    public Professor(String name, Boolean IsOfficier, String LabINTRO,
-                     String EduBackGround, String office, String phone,
-                     String major, String LabLink, String email){
+    public Professor(String name, Boolean isOfficial, String labIntro,
+                     String eduBackground, String office, String phone,
+                     String major, String labUrl, String email){
 
         this.name = name;
-        this.IsOfficier = IsOfficier;
-        this.LabINTRO = LabINTRO;
-        this.EduBackGround = EduBackGround;
+        this.isOfficial = isOfficial;
+        this.labIntro = labIntro;
+        this.eduBackground = eduBackground;
         this.office= office;
         this.phone = phone;
         this.major =major;
-        this.LabLink = LabLink;
+        this.labUrl = labUrl;
         this.email = email;
     }
 
