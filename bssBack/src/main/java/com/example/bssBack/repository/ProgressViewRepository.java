@@ -28,7 +28,7 @@ public interface ProgressViewRepository extends JpaRepository<ProgressView, Long
             "AND pr.Lid = (SELECT l.lid FROM lecture AS l WHERE l.name = :lecture) )ELSE 0 END AS Result;")
     Long IsExistsProgress(@Param("prof") String prof, @Param("lecture") String lecture);
 
-    @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.year = :year ;")
+    @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.year = :year order by pv.lecture_Name;")
     List<ProgressView> FindProgressesByYear(@Param("year")Integer year);
 
     @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.year = :year and pv.grade = :grade order by pv.lecture_Name;")
