@@ -68,7 +68,7 @@ alter table `findmember` change column `lacture_name` `lecture_name` varchar(20)
 
 create table `comment`(
 	`cid` bigint not null auto_increment,
-    `content` varchar(200) not null,
+    `content` varchar(1500) not null,
     `rate`  int(5) default 1,
     `enroll_Sems` varchar(15) not null,
     `recmnd_Cnt` int default 0,

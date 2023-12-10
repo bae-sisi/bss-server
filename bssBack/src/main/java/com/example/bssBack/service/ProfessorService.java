@@ -19,7 +19,7 @@ public class ProfessorService {
     }
 
     public List<Professor> GetAllProfINFO(){
-        return professorRepository.findAll();
+        return professorRepository.findProfessorsByIsOfficier();
     }
 
     public Long SaveProfINFO(Professor professor) throws Exception {

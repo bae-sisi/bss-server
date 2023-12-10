@@ -36,6 +36,8 @@ public class Professor {
     private String phone;
     private String major;
 
+    private String email;
+
     @Column(name = "Lab_Link")
     private String LabLink;
 
@@ -43,7 +45,7 @@ public class Professor {
 
     public Professor(String name, Boolean IsOfficier, String LabINTRO,
                      String EduBackGround, String office, String phone,
-                     String major, String LabLink){
+                     String major, String LabLink, String email){
 
         this.name = name;
         this.IsOfficier = IsOfficier;
@@ -53,6 +55,7 @@ public class Professor {
         this.phone = phone;
         this.major =major;
         this.LabLink = LabLink;
+        this.email = email;
     }
 
 

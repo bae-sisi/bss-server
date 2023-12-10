@@ -39,10 +39,11 @@ public class ProfessorController {
                                    @RequestParam("office") String office,
                                    @RequestParam("phone") String phone,
                                    @RequestParam("major") String major,
-                                   @RequestParam("LabLink") String LabLink) throws Exception {
+                                   @RequestParam("LabLink") String LabLink,
+                                   @RequestParam("email") String email) throws Exception {
 
 
-            Professor professor = new Professor(name, Isofficier, LabINTRO, EduBackGround, office, phone, major, LabLink);
+            Professor professor = new Professor(name, Isofficier, LabINTRO, EduBackGround, office, phone, major, LabLink, email);
 
             System.out.println(professor);
 

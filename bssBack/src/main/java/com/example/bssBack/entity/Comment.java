@@ -20,18 +20,20 @@ public class Comment {
     private String enrollSems;
     @Column(name = "recmnd_Cnt")
     private Integer recmndCnt;
-    private String sid;
+
+    @Column(name = "user_id")
+    private String user_id;
 
     @Column(name = "progress_id")
     private Long progress_id;
 
     protected Comment() {};
 
-    public Comment(String content, String enrollSems, Integer recmndCnt, String sid, Long progress_id, Integer rate){
+    public Comment(String content, String enrollSems, Integer recmndCnt, String user_id, Long progress_id, Integer rate){
         this.content = content;
         this.enrollSems = enrollSems;
         this.recmndCnt = recmndCnt;
-        this.sid = sid;
+        this.user_id = user_id;
         this.progress_id = progress_id;
         this.rate = rate;
     }
