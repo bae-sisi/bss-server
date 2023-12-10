@@ -123,7 +123,7 @@ CREATE TABLE `professor` (
   PRIMARY KEY (`Pid`)
 );
 
-INSERT INTO `professor` (`name`, `Lab_Link`, `edu_background`, `major`,  `office`, `phone`, `email`, `Is_officier`, `Lab_into`)
+INSERT INTO `professor` (`name`, `lab_url`, `edu_background`, `major`,  `office`, `phone`, `email`, `is_official`, `lab_intro`)
 VALUES
 ('전중남', NULL, '연세대학교', '임베디드시스템', 'S4-1 314', '043-261-2264', 'joongnam@cbnu.ac.kr', 1, 'test1'),
 ('이건명', NULL, 'KAIST', '인공지능', 'S4-1 325', '043-261-2263', 'kmlee@cbnu.ac.kr', 1, 'test2'),
