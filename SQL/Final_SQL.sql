@@ -23,8 +23,8 @@ create table `user`(
     `username` varchar(20) Not null,
     `email` varchar(30) not nULL,
 	PRIMARY KEY (`id`) USING BTREE,
-	KEY `FKs4rjqs4udaere8q7udq91fg19` (`attempt_id`) USING BTREE,
-	CONSTRAINT `FKs4rjqs4udaere8q7udq91fg19` FOREIGN KEY (`attempt_id`) REFERENCES `attempt` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+	KEY (`attempt_id`) USING BTREE,
+	FOREIGN KEY (`attempt_id`) REFERENCES `attempt` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 
@@ -139,7 +139,7 @@ VALUES
 ('이의종', 'https://sites.google.com/view/kongjjagae', '고려대학교', '자가-적응 소프트웨어', 'S4-1-317', '043-249-1924', 'kongjjagae@chungbuk.ac.kr', 1, 'test12'),
 ('정지훈', 'https://sites.google.com/view/cbnu-mil/home', '고려대학교', '기계 지능', 'S4-1-329', '043-261-2254', 'jh.jeong@chungbuk.ac.kr', 1, 'test13');
 
-INSERT INTO `professor` (`name`, `Lab_Link`, `edu_background`, `major`,  `office`, `phone`, `email`, `Is_officier`, `Lab_into`)
+INSERT INTO `professor` (`name`, `lab_url`, `edu_background`, `major`,  `office`, `phone`, `email`, `is_official`, `lab_intro`)
 VALUES
 ('김세민', NULL, 'company1', 'major1', 'office1', '010-0000-0000', 'email1@gmail.com', 0, NULL),
 ('김정훈', NULL, 'company2', 'major2', 'office2', '010-0000-0001', 'email2@gmail.com', 0, NULL),

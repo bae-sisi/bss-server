@@ -14,6 +14,6 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
     @Query(nativeQuery = true, value = "select p.name from professor as p where p.Pid = :id ;")
     String findProfessorNameByID(@Param("id")Long id);
 
-    @Query(nativeQuery = true, value = "select * from professor as p where p.Is_officier = 1;")
+    @Query(nativeQuery = true, value = "select * from professor as p where p.Is_official = 1;")
     List<Professor> findProfessorsByIsOfficier();
 }
