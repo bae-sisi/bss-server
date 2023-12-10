@@ -39,18 +39,7 @@ public class ProgressController {
     public ResponseEntity Make(@RequestParam("lecture") String lecture, @RequestParam("prof") String prof, @RequestParam("year") Integer year) throws Exception{
 
         try{
-/*            Lecture lectures = lectureService.FindLeture(lecture);
 
-            Professor professor = professorService.FindProfINFO(prof);
-
-            Progress progress = new Progress();
-
-            progress.setLid(lectures.getLid());
-            progress.setPid(professor.getPid());
-
-            System.out.println(progress);
-
-            progressService.Save(progress);*/
             // 예전에 교과목명, 교수명으로 저장한게 있다면 못넣게 막는다 / 그냥 년도만 업댓되게 / 어,,, 그리고 년도 컬럼 추가 필요
             progressService.TestSave(lecture, prof, year);
 

@@ -117,7 +117,7 @@ CREATE TABLE `professor` (
   `edu_background` varchar(200) DEFAULT NULL,
   `office` varchar(20) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
-  `major` varchar(13) DEFAULT NULL,
+  `major` varchar(100) DEFAULT NULL,
   `Lab_Link` varchar(300) DEFAULT NULL,
   `email` varchar(100) default null,
   PRIMARY KEY (`Pid`)
@@ -164,6 +164,129 @@ create table `progress`(
     foreign key (`Pid`) references `professor`(`Pid`) ON delete cascade ,
     foreign key (`Lid`) references `lecture`(`Lid`) ON delete cascade
 );
+
+INSERT INTO progress (Pid, Lid, year)
+VALUES
+  ((SELECT Pid FROM professor WHERE name = '박정희'),
+   (SELECT Lid FROM lecture WHERE name = '알고리즘'),
+   18),
+  
+  ((SELECT Pid FROM professor WHERE name = '조희승'),
+   (SELECT Lid FROM lecture WHERE name = '창업산학초청세미나Ⅰ'),
+   21),
+  
+  ((SELECT Pid FROM professor WHERE name = '김세민'),
+   (SELECT Lid FROM lecture WHERE name = '오픈소스 웹소프트웨어'),
+   22),
+   
+  ((SELECT Pid FROM professor WHERE name = '이재성'),
+   (SELECT Lid FROM lecture WHERE name = '소프트웨어 실전영어'),
+   22),
+   
+  ((SELECT Pid FROM professor WHERE name = '이의종'),
+   (SELECT Lid FROM lecture WHERE name = '이산수학'),
+   19),
+   
+  ((SELECT Pid FROM professor WHERE name = '이건명'),
+   (SELECT Lid FROM lecture WHERE name = '창업탐색'),
+   21),
+   
+  ((SELECT Pid FROM professor WHERE name = '홍장의'),
+   (SELECT Lid FROM lecture WHERE name = '컴퓨터시스템개론'),
+   23),
+   
+  ((SELECT Pid FROM professor WHERE name = '장순선'),
+   (SELECT Lid FROM lecture WHERE name = '캡스톤디자인'),
+   19),
+   
+  ((SELECT Pid FROM professor WHERE name = '최경주'),
+   (SELECT Lid FROM lecture WHERE name = '캡스톤디자인'),
+   21),
+   
+  ((SELECT Pid FROM professor WHERE name = '노서영'),
+   (SELECT Lid FROM lecture WHERE name = '빅데이터분석시각화'),
+   22),
+   
+  ((SELECT Pid FROM professor WHERE name = '김세민'),
+   (SELECT Lid FROM lecture WHERE name = '알고리즘'),
+   20),
+   
+  ((SELECT Pid FROM professor WHERE name = '노서영'),
+   (SELECT Lid FROM lecture WHERE name = '정보보호'),
+   23),
+   
+  ((SELECT Pid FROM professor WHERE name = '조오현'),
+   (SELECT Lid FROM lecture WHERE name = '컴퓨터 그래픽스'),
+   19),
+   
+  ((SELECT Pid FROM professor WHERE name = '이재성'),
+   (SELECT Lid FROM lecture WHERE name = '오픈소스 전문프로젝트'),
+   23),
+   
+  ((SELECT Pid FROM professor WHERE name = '이의종'),
+   (SELECT Lid FROM lecture WHERE name = '오픈소스소프트웨어 이해와 실습'),
+   18),
+   
+  ((SELECT Pid FROM professor WHERE name = '정지훈'),
+   (SELECT Lid FROM lecture WHERE name = '컴파일러'),
+   23),
+   
+  ((SELECT Pid FROM professor WHERE name = '조오현'),
+   (SELECT Lid FROM lecture WHERE name = '오픈소스 개발프로젝트'),
+   19),
+   
+  ((SELECT Pid FROM professor WHERE name = '문현주'),
+   (SELECT Lid FROM lecture WHERE name = '정보검색'),
+   23),
+   
+  ((SELECT Pid FROM professor WHERE name = '아지즈'),
+   (SELECT Lid FROM lecture WHERE name = '객체지향 설계'),
+   18),
+   
+  ((SELECT Pid FROM professor WHERE name = '이건명'),
+   (SELECT Lid FROM lecture WHERE name = '정보보호'),
+   21),
+   
+  ((SELECT Pid FROM professor WHERE name = '조희승'),
+   (SELECT Lid FROM lecture WHERE name = '정보·컴퓨터교재연구및지도법'),
+   23),
+   
+  ((SELECT Pid FROM professor WHERE name = '김윤성'),
+   (SELECT Lid FROM lecture WHERE name = '정보보호'),
+   23),
+   
+  ((SELECT Pid FROM professor WHERE name = '류관희'),
+   (SELECT Lid FROM lecture WHERE name = '알고리즘'),
+   18),
+   
+  ((SELECT Pid FROM professor WHERE name = '조영복'),
+   (SELECT Lid FROM lecture WHERE name = '정보·컴퓨터교육론'),
+   23),
+   
+  ((SELECT Pid FROM professor WHERE name = '안광모'),
+   (SELECT Lid FROM lecture WHERE name = '빅데이터분석시각화'),
+   20),
+   
+  ((SELECT Pid FROM professor WHERE name = '아지즈'),
+   (SELECT Lid FROM lecture WHERE name = '오픈소스소프트웨어 이해와 실습'),
+   18),
+   
+  ((SELECT Pid FROM professor WHERE name = '김세민'),
+   (SELECT Lid FROM lecture WHERE name = '영상처리'),
+   18),
+   
+  ((SELECT Pid FROM professor WHERE name = '장순선'),
+   (SELECT Lid FROM lecture WHERE name = '정보보호'),
+   23),
+   
+  ((SELECT Pid FROM professor WHERE name = '박정희'),
+   (SELECT Lid FROM lecture WHERE name = '미래설계구현'),
+   21),
+   
+  ((SELECT Pid FROM professor WHERE name = '조영복'),
+   (SELECT Lid FROM lecture WHERE name = '컴퓨터 그래픽스'),
+   23);
+
 
 
 INSERT IGNORE INTO `progress` (`Pid`, `Lid`, `year`)
