@@ -9,16 +9,16 @@ import java.util.List;
 
 public interface ProgressViewRepository extends JpaRepository<ProgressView, Long> {
 
-    @Query(nativeQuery = true, value = "select * from progress_view as pv;")
+    @Query(nativeQuery = true, value = "select * from progress_view as pv order by pv.lecture_Name;")
     List<ProgressView> FindAllProgress();
 
-    @Query(nativeQuery = true, value = "select * from progress_view as pv where pv.lecture_Name like %:index% ;")
+    @Query(nativeQuery = true, value = "select * from progress_view as pv where (pv.lecture_Name like %:index% or pv.prof_Name like %:index% ) order by pv.lecture_Name;")
     List<ProgressView> FindConsistIndexProgress(@Param("index") String index);
 
-    @Query(nativeQuery = true, value = "select * from progress_view as pv where pv.grade = :grade ;")
+    @Query(nativeQuery = true, value = "select * from progress_view as pv where pv.grade = :grade order by pv.lecture_Name;")
     List<ProgressView> FindProgressesByGrade(@Param("grade") Integer grade);
 
-    @Query(nativeQuery = true, value = "select * from progress_view as pv where pv.lecture_Name like %:index% and pv.grade = :grade ;")
+    @Query(nativeQuery = true, value = "select * from progress_view as pv where (pv.lecture_Name like %:index% or pv.prof_Name like %:index% ) and pv.grade = :grade order by pv.lecture_Name;")
     List<ProgressView> FindProgressesByGradeANDConsistIndex(@Param("grade") Integer grade, @Param("index") String index);
 
     @Query(nativeQuery = true, value = "SELECT CASE WHEN EXISTS ( SELECT 1 FROM progress AS pr WHERE pr.Pid = (SELECT p.Pid FROM professor AS p WHERE p.name = :prof)" +
@@ -34,10 +34,10 @@ public interface ProgressViewRepository extends JpaRepository<ProgressView, Long
     @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.year = :year and pv.grade = :grade order by pv.lecture_Name;")
     List<ProgressView> FindProgressesByYearAndGrade(@Param("year")Integer year, @Param("grade") Integer grade);
 
-    @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.year = :year and pv.lecture_Name like %:index% order by pv.lecture_Name ;")
+    @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.year = :year and (pv.lecture_Name like %:index% or pv.prof_Name like %:index% ) order by pv.lecture_Name ;")
     List<ProgressView> FindProgressesByYearAndString(@Param("year")Integer year ,@Param("index") String index);
 
-    @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.year = :year and pv.grade = :grade and pv.lecture_Name like %:index% order by pv.lecture_Name;")
+    @Query(nativeQuery = true, value = "SELECT * from progress_view as pv where pv.year = :year and pv.grade = :grade and (pv.lecture_Name like %:index% or pv.prof_Name like %:index% ) order by pv.lecture_Name;")
     List<ProgressView> FindProgressesByYearAndGradeAndString(@Param("year")Integer year, @Param("grade") Integer grade, @Param("index") String index);
 
 
