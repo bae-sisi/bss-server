@@ -9,16 +9,16 @@ import java.util.List;
 
 public interface ProgressViewRepository extends JpaRepository<ProgressView, Long> {
 
-    @Query(nativeQuery = true, value = "select * from progress_view as pv order by pv.lecture_Name;")
+    @Query(nativeQuery = true, value = "select * from progress_view as pv;")
     List<ProgressView> FindAllProgress();
 
-    @Query(nativeQuery = true, value = "select * from progress_view as pv where (pv.lecture_Name like %:index% or pv.prof_Name like %:index% ) order by pv.lecture_Name;")
+    @Query(nativeQuery = true, value = "select * from progress_view as pv where (pv.lecture_Name like %:index% or pv.prof_Name like %:index% );")
     List<ProgressView> FindConsistIndexProgress(@Param("index") String index);
 
-    @Query(nativeQuery = true, value = "select * from progress_view as pv where pv.grade = :grade order by pv.lecture_Name;")
+    @Query(nativeQuery = true, value = "select * from progress_view as pv where pv.grade = :grade ;")
     List<ProgressView> FindProgressesByGrade(@Param("grade") Integer grade);
 
-    @Query(nativeQuery = true, value = "select * from progress_view as pv where (pv.lecture_Name like %:index% or pv.prof_Name like %:index% ) and pv.grade = :grade order by pv.lecture_Name;")
+    @Query(nativeQuery = true, value = "select * from progress_view as pv where (pv.lecture_Name like %:index% or pv.prof_Name like %:index% ) and pv.grade = :grade;")
     List<ProgressView> FindProgressesByGradeANDConsistIndex(@Param("grade") Integer grade, @Param("index") String index);
 
     @Query(nativeQuery = true, value = "SELECT CASE WHEN EXISTS ( SELECT 1 FROM progress AS pr WHERE pr.Pid = (SELECT p.Pid FROM professor AS p WHERE p.name = :prof)" +
