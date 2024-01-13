@@ -23,11 +23,18 @@ public class EventController {
     }
 
     @GetMapping("/get/all/event")
-    public List<EventDto> GetEvents(@RequestParam(value = "index", required = false) String index){
+    public List<EventDto> GetEvents(@RequestParam(value = "index", required = false) String index, @RequestParam(value = "page") Integer page){
+
+        // 1page:0~9, 2page:10~19,
+
+        Integer start = (page-1) * 10;
+
+        System.out.println(start);
+
         if( index == null || index.isEmpty() || index.isBlank() ){
-            return eventService.GetALL();
+            return eventService.GetALL(start);
         }else{
-            return eventService.GetContainIndex(index);
+            return eventService.GetContainIndex(index, start);
         }
     }
 

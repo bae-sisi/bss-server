@@ -87,9 +87,23 @@ public class CommentController {
         }
     }
 
-    @GetMapping("/increase/recmnd/{cid}")
-    public void IncrsRecmnd(@PathVariable("cid") Long cid){
-        commentService.IncresRecmnd(cid);
+    @GetMapping("/auth/increase/recmnd/{cid}")
+    public ResponseEntity IncrsRecmnd(@PathVariable("cid") Long cid){
+
+        String user_id = Security.getCurrentSid();
+
+        if(!user_id.equals("anonymousUser") && !user_id.isEmpty()) {
+            commentService.IncresRecmnd(cid);
+
+            HashMap<String, Object> result = new HashMap<>();
+            result.put("result", "추천에 성공하였습니다.");
+            return new ResponseEntity(result, HttpStatus.CREATED);
+
+        }else{
+            HashMap<String, Object> result = new HashMap<>();
+            result.put("result", "로그인이 필요합니다");
+            return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
+        }
     }
 
 

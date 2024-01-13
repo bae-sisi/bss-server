@@ -19,12 +19,12 @@ public class EventService {
     }
 
 
-    public List<EventDto> GetALL(){
-        return eventRepository.FindAll();
+    public List<EventDto> GetALL(Integer start){
+        return eventRepository.FindAll(start);
     }
 
-    public List<EventDto> GetContainIndex(String index){
-        return eventRepository.findEventUserConsistIndex(index);
+    public List<EventDto> GetContainIndex(String index, Integer start){
+        return eventRepository.findEventUserConsistIndex(index, start);
     }
 
 

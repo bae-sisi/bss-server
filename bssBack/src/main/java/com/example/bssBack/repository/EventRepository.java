@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-    @Query(nativeQuery = true, value = "select * from event where event.eid = :id")
+    @Query(nativeQuery = true, value = "select * from event where event.eid = :id;")
     Event findByEid(@Param("id") Long id);
 
     @Query(nativeQuery = true, value = "select * from event e where e.title like %:index% or e.content like %:index% ;")
@@ -24,12 +24,12 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     EventDto FindEventAndUserByEId(@Param("eid")Long eid);
 
     //전체 검색
-    @Query(nativeQuery = true, value = "select e.eid, e.title, e.content, e.created_at, u.username as author, u.sid from event as e join user as u ON e.user_id = u.sid order by e.created_at DESC ;")
-    List<EventDto> FindAll();
+    @Query(nativeQuery = true, value = "select e.eid, e.title, e.content, e.created_at, u.username as author, u.sid from event as e join user as u ON e.user_id = u.sid order by e.created_at DESC LIMIT 10 OFFSET :startNum ;")
+    List<EventDto> FindAll(@Param("startNum") Integer startNum);
 
     //검색어를 통한 검색
-    @Query(nativeQuery = true, value = "select e.eid, e.title, e.content, e.created_at, u.username as author, u.sid from event as e join user as u ON e.user_id = u.sid where e.title like %:index% or u.username like %:index% order by e.created_at DESC; ")
-    List<EventDto> findEventUserConsistIndex(@Param("index") String index);
+    @Query(nativeQuery = true, value = "select e.eid, e.title, e.content, e.created_at, u.username as author, u.sid from event as e join user as u ON e.user_id = u.sid where e.title like %:index% or u.username like %:index% order by e.created_at DESC Limit 10 OFFSET :startNum ; ")
+    List<EventDto> findEventUserConsistIndex(@Param("index") String index, @Param("startNum") Integer startNum);
 
     @Query(nativeQuery = true, value = "select e.eid, e.title, e.content, e.created_at, u.username as author, u.sid from event as e join user as u ON e.user_id = u.sid order by e.created_at DESC limit 3;")
     List<EventDto> findEventDTOLimit();
