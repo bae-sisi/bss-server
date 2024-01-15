@@ -27,6 +27,11 @@ public class RecmnderController {
         return recmnderService.HoleRecmndNum(cid);
     }
 
+    @GetMapping("/get/recmnd/num/view")
+    public Integer GetRecmndNumAtView(@Param("cid") Long cid){
+        return recmnderService.RecmndCnt(cid);
+    }
+
     @PostMapping("/auth/recmnd/click")
     public ResponseEntity ControllRecmnd(@Param("cid") Long cid){
 

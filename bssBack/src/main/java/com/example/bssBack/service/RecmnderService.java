@@ -1,6 +1,7 @@
 package com.example.bssBack.service;
 
 import com.example.bssBack.entity.Recmnder;
+import com.example.bssBack.repository.RecmndViewRepository;
 import com.example.bssBack.repository.RecmnderRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +12,20 @@ public class RecmnderService {
 
     private RecmnderRepository recmnderRepository;
 
-    public RecmnderService(RecmnderRepository recmnderRepository){
+    private RecmndViewRepository recmndViewRepository;
+
+    public RecmnderService(RecmnderRepository recmnderRepository, RecmndViewRepository recmndViewRepository){
+
         this.recmnderRepository = recmnderRepository;
+        this.recmndViewRepository = recmndViewRepository;
     }
 
     public Integer HoleRecmndNum(Long cid){
         return recmnderRepository.findRecmndNumByCid(cid);
+    }
+
+    public Integer RecmndCnt(Long cid){
+        return recmndViewRepository.CntByCid(cid);
     }
 
     public void RecmndClick(String sid, Long cid){
